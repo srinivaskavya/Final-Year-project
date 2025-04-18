@@ -1,0 +1,144 @@
+tet_FOV:= 30*10^-3;
+sigma_tet:= 4*10^-3
+pi:=3.1416;
+sigma_p:= .3;
+Z:= 0.25*10^3;
+tet_div:= 0.008;
+/*background power and noise*/
+r_a:= 5; 
+steradian_FOV:= pi*tet_FOV^2/4;
+optic_band:= 0.01;
+Aa:= pi*r_a^2;
+spect_radiance:= 10^-4;
+P_b:= spect_radiance*Aa*steradian_FOV*optic_band;
+responsivity:= .8;
+electron_charge:= 1.66*10^(-19);
+B_e:= 1/10^-9;
+var_back:= 10^(-1);
+var_p:= sigma_p^2;
+var_tet:= sigma_tet^2;
+wz:= Z*tet_div;
+94
+
+nu:= (pi/2)^.5*r_a*.01/wz;
+A_0:= erf(nu)^2;
+wzeq:= (wz^2* pi^.5*erf(nu)/2/nu/exp(-nu^2))^.5;
+sigmaRytov:=10;
+sigmaRytov1:= sigmaRytov^(0.5);
+a:= (exp(.49*sigmaRytov/(1+1.11*sigmaRytov1^(12/5))^(7/6))-1)^-1; 
+b:= (exp(.51*sigmaRytov/(1+0.69*sigmaRytov1^(12/5))^(5/6))-1)^-1;
+tau:= wzeq^2/4/(Z^2*sigma_tet^2+sigma_p^2 + sigma_p^2);
+b_1:= exp(-tet_FOV^2/2/(sigma_tet^2+sigma_tet^2));
+ex1:=1-b_1
+m2:=((a*b*(tau)^2)/(((1+(tau))*gamma(a)*gamma(b)*(10^(Pt/10)))));
+M:=m2*ex1;
+z:= ((a*b*(tau))/((1+tau)*(10^(Pt/10))));
+D3:= meijerG(3,3, [tau,2,1.5,0], [2,1,(a-1),(tau-1),(b-1)], z)
+Sum9:= 0.5*mej1*sum(((G/8))^k / gamma(k+1), k = 0..10)
+pe:= b_1/2+Sum9;
+cowc_wo_pe := hfarray(12..50,[pe $ Pt=12..50]);
+fn:= (1-(1-pe));
+fn2:=(1-((1-pe)*(1-pe)));
+fn3:=(1-((1-pe)*(1-pe)*(1-pe)));
+plot(plot::Function2d(fn, Pt=5..32, Color = RGB::Yellow,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+95
+
+ plot::Function2d(fn2, Pt=5..32, Color = RGB::Red,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn3, Pt=5..32, Color = RGB::Green,CoordinateType = LinLog,
+ Legend = "HD_0.25k"))
+cowc_wo_pe := hfarray(5..32,[fn $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn2 $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn3 $ Pt= 5..32]);
+tet_FOV:= 30*10^-3;
+sigma_tet:= 4*10^-3
+pi:=3.1416;
+sigma_p:= .3;
+Z:= 0.25*10^3;
+tet_div:= 0.008;
+/*background power and noise*/
+r_a:= 5; 
+steradian_FOV:= pi*tet_FOV^2/4;
+optic_band:= 0.01;
+Aa:= pi*r_a^2;
+spect_radiance:= 10^-4;
+P_b:= spect_radiance*Aa*steradian_FOV*optic_band;
+responsivity:= .8;
+electron_charge:= 1.66*10^(-19);
+B_e:= 1/10^-9;
+var_back:= 10^(-1);
+var_p:= sigma_p^2;
+var_tet:= sigma_tet^2;
+96
+
+wz:= Z*tet_div;
+nu:= (pi/2)^.5*r_a*.01/wz;
+A_0:= erf(nu)^2;
+wzeq:= (wz^2* pi^.5*erf(nu)/2/nu/exp(-nu^2))^.5;
+sigmaRytov:=1.4;
+sigmaRytov1:= sigmaRytov^(0.5);
+a:= (exp(.49*sigmaRytov/(1+1.11*sigmaRytov1^(12/5))^(7/6))-1)^-1; 
+b:= (exp(.51*sigmaRytov/(1+0.69*sigmaRytov1^(12/5))^(5/6))-1)^-1;
+tau:= wzeq^2/4/(Z^2*sigma_tet^2+sigma_p^2 + sigma_p^2);
+b_1:= exp(-tet_FOV^2/2/(sigma_tet^2+sigma_tet^2));
+ex1:=1-b_1
+m2:=((a*b*(tau)^2)/(((1+(tau))*gamma(a)*gamma(b)*(10^(Pt/10)))));
+M:=m2*ex1;
+z:= ((a*b*(tau))/((1+tau)*(10^(Pt/10))));
+D3:= meijerG(3,3, [tau,2,1.5,0], [2,1,(a-1),(tau-1),(b-1)], z)
+Sum9:= 0.5*mej1*sum(((G/8))^k / gamma(k+1), k = 0..10)
+pe:= b_1/2+Sum9;
+cowc_wo_pe := hfarray(12..50,[pe $ Pt=12..50]);
+fn4:= (1-(1-pe));
+fn5:=(1-((1-pe)*(1-pe)));
+fn6:=(1-((1-pe)*(1-pe)*(1-pe)));
+97
+
+plot(plot::Function2d(fn4, Pt=5..32, Color = RGB::Yellow,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn5, Pt=5..32, Color = RGB::Red,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn6, Pt=5..32, Color = RGB::Green,CoordinateType = LinLog,
+ Legend = "HD_0.25k"))
+plot(plot::Function2d(fn, Pt=5..32, Color = RGB::Yellow,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn2, Pt=5..32, Color = RGB::Red,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn3, Pt=5..32, Color = RGB::Green,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),plot::Function2d(fn4, Pt=5..32, Color = 
+RGB::Blue,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn5, Pt=5..32, Color = RGB::Black,CoordinateType = LinLog,
+ Legend = "HD_0.25k"),
+ plot::Function2d(fn6, Pt=5..32, Color = RGB::Pink,CoordinateType = LinLog,
+ Legend = "HD_0.25k"));
+cowc_wo_pe := hfarray(5..32,[fn $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn2 $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn3 $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn4 $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn5 $ Pt= 5..32]);
+cowc_wo_pe := hfarray(5..32,[fn6 $ Pt= 5..32]);
+% DCSK Modulation Function
+function modulated_signal = DCSK_modulate(data, spreading_code)
+ ref_code = repmat(spreading_code, 1, length(data));
+ modulated_signal = [];
+ for i = 1:length(data)
+ if data(i) == 1
+ modulated_signal = [modulated_signal, spreading_code, spreading_code];
+98
+ else
+ modulated_signal = [modulated_signal, spreading_code, -spreading_code];
+ end
+ end
+end
+% Channel Model for FSO
+function received_signal = FSO_channel(signal, turbulence_intensity)
+ h = lognrnd(0, turbulence_intensity, 1, length(signal)); % FSO turbulence
+ received_signal = signal .* h;
+end
+% BER Calculation
+function ber = calculate_BER(original_data, received_data)
+ errors = sum(original_data ~= received_data);
+ ber = errors / length(original_data);
+end
